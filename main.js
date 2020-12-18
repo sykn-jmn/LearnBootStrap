@@ -243,4 +243,69 @@ const person1 = new Person('Jeman','Mama','2-10-1999')
 
 console.log(person1);*/
 
- 
+//console.log(window);// the very top level. the window of the browser
+
+// Sinlge Element Selector
+/*console.log(document.getElementById('my-form'));
+console.log(document.querySelector('h1'));// will only select the first element with
+*///Recommended to only use querySelector
+
+//Multiple Element
+//console.log(document.querySelectorAll('.item'));// will return a node list. which is like an array
+
+//const items = document.querySelectorAll('.item');
+
+//sample of arraying chuchu the elemts from querySelectorAll
+//items.forEach((item) => console.log(item.textContent));
+
+/*
+const ul = document.querySelector('.items');
+//ul.remove();// removes all .items class
+ul.firstElementChild.textContent = 'Hello'; 
+
+ul.children[1].innerText = 'Brad';
+
+ul.lastElementChild.innerHTML = '<h1>Hello</h1>';
+*/
+/*const btn = document.querySelector('.btn');
+//btn.style.background = 'red'; //changes the background color like css but more dynamic
+
+
+//events = click, mousehover, mouseout,
+btn.addEventListener('click',(e) =>{ //listens for when btn is clicked
+    e.preventDefault(); //stops from submitting
+    document.querySelector('#my-form').style.background = 'gray';
+    document.querySelector('body').classList.add('bg-dark');
+    document.querySelector('.items').lastElementChild.innerHTML = '<h1>Hello</h1>'
+}); */
+
+const myForm = document.querySelector('#my-form');
+const nameInput = document.querySelector('#name');
+const emailInput = document.querySelector('#email');
+const msg = document.querySelector('.msg');
+const userList = document.querySelector('#users');
+
+  
+myForm.addEventListener('submit', onSubmit);
+
+function onSubmit(e){
+    e.preventDefault();
+    if(nameInput.value === '' || emailInput.value === ''){
+        msg.classList.add('error');
+        msg.innerHTML = 'Please enter all fields'
+
+        setTimeout(()=> {msg.innerHTML = '';
+                        msg.classList.remove('error')}, 3000);
+    }
+    else{
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(nameInput.value + ' : ' +emailInput.value));
+
+        userList.appendChild(li);
+
+        //clear fields
+
+        nameInput.value = '';
+        emailInput.value = '';
+    }
+}
